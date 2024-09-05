@@ -53,9 +53,9 @@ WHERE status NOT LIKE '% won by %' AND status NOT LIKE '%draw%';
 
 
 select status, win_team, win_how from matches_1
-where status like '%run% %'
-or status LIKE '%wkts% %'
-or status LIKE '%wickets% %'
+-- where status like '%run% %'
+-- or status LIKE '%wkts% %'
+-- or status LIKE '%wickets% %'
 ;
 
 
@@ -71,4 +71,50 @@ WHERE win_how LIKE '%wkts% %';
 UPDATE matches_1
 SET win_how = CONCAT(TRIM(SUBSTRING_INDEX(win_how, 'wickets', 1)), ' wickets')
 WHERE win_how LIKE '%wickets% %';
+
+UPDATE matches_1
+SET win_how = REPLACE(win_how, 'wkts', 'wickets')
+WHERE win_how LIKE '%wkts%';
+
+UPDATE matches_1
+SET win_how = REPLACE(win_how, 'wkt', 'wickets')
+WHERE win_how LIKE '%wkt%';
+
+
+-- Remove unwanted text
+select * from matches_1
+where status like '%Day 5: 2nd Session - Pakistan%';
+
+update matches_1 set win_team = 'Pakistan'
+where win_team = 'Day 5: 2nd Session - Pakistan';
+
+
+select * from series_1;
+select * from matches_1;
+
+
+SELECT 
+    s.id AS series_id,
+    s.name AS series_name,
+    -- s.startDate,
+    -- s.odi,
+    -- s.t20,
+    -- s.test,
+    s.matches,
+    m.match_id,
+    m.match_name,
+    m.match_type,
+    -- m.status,
+    m.team1,
+    m.team2,
+    m.win_team,
+    m.win_how,
+    m.venue,
+    m.date
+FROM 
+    series_1 s
+JOIN 
+    matches_1 m
+ON 
+    s.id = m.series_id;
 
