@@ -116,5 +116,24 @@ FROM
 JOIN 
     matches_1 m
 ON 
-    s.id = m.series_id;
+    s.id = m.series_id
+-- Where (team1='Pakistan' or team1='Bangladesh')
+-- or (team2='Pakistan' or team2='Bangladesh')	
+-- Where team1='Pakistan' or team2='Pakistan'
+    ;
 
+
+SELECT 
+    YEAR(date) AS year,
+    SUM(CASE WHEN team1 = 'Bangladesh' OR team2 = 'Bangladesh' THEN 1 ELSE 0 END) AS bangladesh_matches_played,
+    SUM(CASE WHEN team1 = 'Pakistan' OR team2 = 'Pakistan' THEN 1 ELSE 0 END) AS pakistan_matches_played
+FROM 
+    matches_1
+GROUP BY 
+    YEAR(date)
+ORDER BY 
+    year;
+
+select * from matches_1 where venue = 'Rawalpindi Cricket Stadium, Rawalpindi';
+select * from matches_1 where venue = 'Zahur Ahmed Chowdhury Stadium, Chattogram' and status like '%Ban%';
+select * from matches_1 where venue = 'Sylhet International Cricket Stadium, Sylhet' and status like '%Ban%';
