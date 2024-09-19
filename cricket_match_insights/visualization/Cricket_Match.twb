@@ -1675,8 +1675,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1250' minheight='1250' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='38' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='97892' id='37' param='vert' type-v2='layout-flow' w='98730' x='635' y='1054'>
+            <zone h='100000' id='42' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='97892' id='41' param='vert' type-v2='layout-flow' w='98730' x='635' y='1054'>
                 <zone fixed-size='280' h='48943' id='3' is-fixed='true' name='Type Played' w='46024' x='635' y='1054'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -1792,8 +1792,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='900' minheight='900' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='42' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='97892' id='41' param='vert' type-v2='layout-flow' w='98730' x='635' y='1054'>
+            <zone h='100000' id='46' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='97892' id='45' param='vert' type-v2='layout-flow' w='98730' x='635' y='1054'>
                 <zone fixed-size='280' h='48946' id='3' is-fixed='true' name='Played' w='66005' x='635' y='1054'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -1895,8 +1895,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='900' minheight='900' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='45' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='97892' id='44' param='vert' type-v2='layout-flow' w='98730' x='635' y='1054'>
+            <zone h='100000' id='49' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='97892' id='48' param='vert' type-v2='layout-flow' w='98730' x='635' y='1054'>
                 <zone fixed-size='280' h='48945' id='3' is-fixed='true' name='BAN Wins/Played' w='57266' x='635' y='1054'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -1974,8 +1974,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='29' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='97892' id='28' param='vert' type-v2='layout-flow' w='98730' x='635' y='1054'>
+            <zone h='100000' id='33' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='97892' id='32' param='vert' type-v2='layout-flow' w='98730' x='635' y='1054'>
                 <zone fixed-size='280' h='48945' id='3' is-fixed='true' name='Matches/Venue' w='98730' x='635' y='1054'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -2354,7 +2354,7 @@
       </cards>
       <simple-id uuid='{CC386F58-4476-41CF-AE34-93C7E1E09B34}' />
     </window>
-    <window class='dashboard' maximized='true' name='Team Performance over years'>
+    <window class='dashboard' name='Team Performance over years'>
       <viewpoints>
         <viewpoint name='Draws'>
           <zoom type='entire-view' />
@@ -2399,10 +2399,10 @@
           <zoom type='entire-view' />
         </viewpoint>
       </viewpoints>
-      <active id='32' />
+      <active id='-1' />
       <simple-id uuid='{D09AC585-65FF-416C-AAA2-F051431BD0E4}' />
     </window>
-    <window class='dashboard' name='Venue Performance'>
+    <window class='dashboard' maximized='true' name='Venue Performance'>
       <viewpoints>
         <viewpoint name='Matches/Venue'>
           <zoom type='entire-view' />
