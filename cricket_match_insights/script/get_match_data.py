@@ -1,3 +1,4 @@
+import os
 import mysql.connector
 import requests
 import csv
@@ -5,7 +6,9 @@ import csv
 # Constants
 API_KEY = "d1d01ec4-9cb5-4d3e-a762-fe29c7123da4"
 BASE_API_URL = "https://api.cricapi.com/v1/series_info?apikey="
-CSV_FILE = 'cricket_match_data.csv'
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(SCRIPT_DIR, '..', 'data')
+CSV_FILE = os.path.join(DATA_DIR, 'cricket_match_data.csv')
 
 # Database configuration
 DB_CONFIG = {
@@ -16,18 +19,14 @@ DB_CONFIG = {
     'raise_on_warnings': True
 }
 
-
 def connect_to_database():
     """Establishes a connection to the MySQL database and returns the connection object."""
     return mysql.connector.connect(**DB_CONFIG)
 
-
 def get_series_ids(cursor):
     """Fetches all series IDs from the series_1 table."""
     cursor.execute("SELECT id FROM series_1")
-    # cursor.execute("SELECT id, startDate FROM series_1 order by startDate desc limit 1")
     return [row[0] for row in cursor.fetchall()]
-
 
 def fetch_series_info(series_id):
     """Fetches series information from the CricAPI for the given series_id."""
@@ -38,7 +37,6 @@ def fetch_series_info(series_id):
     else:
         print(f"Failed to fetch data for series_id {series_id}")
         return None
-
 
 def extract_match_data(series_id, series_info):
     """Extracts relevant match data from the API response."""
@@ -69,7 +67,6 @@ def extract_match_data(series_id, series_info):
             })
     return matches
 
-
 def write_to_csv(matches, csv_file):
     """Writes the extracted match data to a CSV file."""
     with open(csv_file, mode='a', newline='') as file:
@@ -88,7 +85,6 @@ def write_to_csv(matches, csv_file):
                 match['team2']
             ])
 
-
 def main():
     """Main function to orchestrate the fetching and saving of match data."""
     conn = connect_to_database()
@@ -103,8 +99,10 @@ def main():
         cursor.close()
         conn.close()
 
-
 if __name__ == "__main__":
+    # Ensure data directory exists
+    os.makedirs(DATA_DIR, exist_ok=True)
+
     # Ensure CSV headers are written before appending data
     with open(CSV_FILE, mode='w', newline='') as file:
         writer = csv.writer(file)

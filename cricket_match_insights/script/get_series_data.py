@@ -1,3 +1,4 @@
+import os
 import requests
 import csv
 
@@ -6,9 +7,12 @@ API_KEY = "d1d01ec4-9cb5-4d3e-a762-fe29c7123da4"
 API_URL = "https://api.cricapi.com/v1/series"
 BATCH_SIZE = 25
 TOTAL_ROWS = 628
-CSV_FILE = "cricket_series_data.csv"
 CSV_COLUMNS = ["id", "name", "startDate", "endDate", "odi", "t20", "test", "squads", "matches"]
 
+# Define the data directory relative to the script's directory
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(SCRIPT_DIR, '..', 'data')
+CSV_FILE = os.path.join(DATA_DIR, "cricket_series_data.csv")
 
 def fetch_series_data(offset):
     """
@@ -20,7 +24,6 @@ def fetch_series_data(offset):
     }
     response = requests.get(API_URL, params=params)
     return response.json()
-
 
 def write_to_csv(data, file):
     """
@@ -41,7 +44,6 @@ def write_to_csv(data, file):
                 "matches": series["matches"]
             })
 
-
 def initialize_csv(file):
     """
     Initialize the CSV file and write the header.
@@ -50,11 +52,13 @@ def initialize_csv(file):
         writer = csv.DictWriter(csvfile, fieldnames=CSV_COLUMNS)
         writer.writeheader()
 
-
 def main():
     """
     Main function to fetch data and save it to a CSV file.
     """
+    # Ensure the data directory exists
+    os.makedirs(DATA_DIR, exist_ok=True)
+
     initialize_csv(CSV_FILE)
 
     offset = 0
@@ -74,7 +78,6 @@ def main():
         offset += BATCH_SIZE
 
     print(f"Data has been successfully saved to {CSV_FILE}.")
-
 
 if __name__ == "__main__":
     main()
